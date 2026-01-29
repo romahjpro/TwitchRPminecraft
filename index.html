@@ -1,0 +1,738 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Ресурспаки Minecraft</title>
+  <style>
+    /* Minecraft стиль */
+    @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+    
+    :root {
+      --minecraft-green: #55aa55;
+      --minecraft-dark-green: #2d5a2d;
+      --minecraft-brown: #8b7355;
+      --minecraft-dark-brown: #5d4037;
+      --minecraft-light-brown: #a1887f;
+      --minecraft-gray: #616161;
+      --minecraft-dark-gray: #424242;
+      --minecraft-black: #212121;
+      --minecraft-white: #f5f5f5;
+    }
+    
+    body {
+      font-family: 'Arial', sans-serif;
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 20px;
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+      color: var(--minecraft-white);
+      min-height: 100vh;
+      position: relative;
+      overflow-x: hidden;
+    }
+    
+    /* Minecraft блоки на фоне */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: 
+        linear-gradient(90deg, rgba(0,0,0,0.1) 1px, transparent 1px),
+        linear-gradient(rgba(0,0,0,0.1) 1px, transparent 1px);
+      background-size: 32px 32px;
+      z-index: -1;
+      animation: gridMove 20s linear infinite;
+    }
+    
+    @keyframes gridMove {
+      0% {
+        background-position: 0 0;
+      }
+      100% {
+        background-position: 32px 32px;
+      }
+    }
+    
+    /* Анимированные пиксельные частицы */
+    .pixel-particle {
+      position: fixed;
+      width: 4px;
+      height: 4px;
+      background: var(--minecraft-green);
+      border-radius: 1px;
+      pointer-events: none;
+      z-index: -1;
+      opacity: 0.3;
+    }
+    
+    h1 {
+      text-align: center;
+      margin-bottom: 40px;
+      font-family: 'Press Start 2P', cursive;
+      font-size: 2.5rem;
+      color: var(--minecraft-green);
+      text-shadow: 
+        3px 3px 0 var(--minecraft-dark-green),
+        6px 6px 0 rgba(0,0,0,0.3);
+      letter-spacing: 2px;
+      animation: titleGlow 3s ease-in-out infinite alternate;
+      padding: 20px;
+      background: rgba(0,0,0,0.7);
+      border: 4px solid var(--minecraft-green);
+      border-image: 
+        linear-gradient(
+          45deg,
+          var(--minecraft-green) 25%,
+          var(--minecraft-dark-green) 25%,
+          var(--minecraft-dark-green) 50%,
+          var(--minecraft-green) 50%,
+          var(--minecraft-green) 75%,
+          var(--minecraft-dark-green) 75%
+        ) 4;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    h1::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(
+        45deg,
+        transparent 30%,
+        rgba(85, 170, 85, 0.1) 50%,
+        transparent 70%
+      );
+      animation: shine 3s infinite linear;
+    }
+    
+    @keyframes shine {
+      0% {
+        transform: translateX(-100%) translateY(-100%) rotate(45deg);
+      }
+      100% {
+        transform: translateX(100%) translateY(100%) rotate(45deg);
+      }
+    }
+    
+    @keyframes titleGlow {
+      0% {
+        text-shadow: 
+          3px 3px 0 var(--minecraft-dark-green),
+          6px 6px 0 rgba(0,0,0,0.3),
+          0 0 10px rgba(85, 170, 85, 0.5);
+      }
+      100% {
+        text-shadow: 
+          3px 3px 0 var(--minecraft-dark-green),
+          6px 6px 0 rgba(0,0,0,0.3),
+          0 0 20px rgba(85, 170, 85, 0.8),
+          0 0 30px rgba(85, 170, 85, 0.4);
+      }
+    }
+    
+    section {
+      background: rgba(30, 30, 46, 0.9);
+      padding: 25px;
+      margin-bottom: 30px;
+      border-radius: 0;
+      border: 3px solid var(--minecraft-brown);
+      position: relative;
+      transform: translateY(20px);
+      opacity: 0;
+      animation: sectionAppear 0.6s ease-out forwards;
+      box-shadow: 
+        0 4px 15px rgba(0,0,0,0.5),
+        inset 0 0 0 1px rgba(255,255,255,0.1);
+      transition: all 0.3s ease;
+    }
+    
+    section:hover {
+      transform: translateY(-5px);
+      box-shadow: 
+        0 8px 25px rgba(0,0,0,0.7),
+        0 0 20px rgba(85, 170, 85, 0.2),
+        inset 0 0 0 1px rgba(255,255,255,0.2);
+      border-color: var(--minecraft-green);
+    }
+    
+    @keyframes sectionAppear {
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+    
+    /* Задержка для каждой секции */
+    section:nth-child(1) { animation-delay: 0.1s; }
+    section:nth-child(2) { animation-delay: 0.2s; }
+    section:nth-child(3) { animation-delay: 0.3s; }
+    section:nth-child(4) { animation-delay: 0.4s; }
+    section:nth-child(5) { animation-delay: 0.5s; }
+    section:nth-child(6) { animation-delay: 0.6s; }
+    section:nth-child(7) { animation-delay: 0.7s; }
+    
+    h2 {
+      border-bottom: 3px solid var(--minecraft-green);
+      padding-bottom: 10px;
+      margin-bottom: 20px;
+      color: var(--minecraft-green);
+      font-family: 'Press Start 2P', cursive;
+      font-size: 1.2rem;
+      letter-spacing: 1px;
+      position: relative;
+      display: inline-block;
+      padding-right: 30px;
+    }
+    
+    h2::after {
+      content: '▶';
+      position: absolute;
+      right: 0;
+      animation: arrowBlink 1s infinite;
+      color: var(--minecraft-green);
+    }
+    
+    @keyframes arrowBlink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+    
+    ul {
+      list-style-type: none;
+      padding-left: 0;
+    }
+    
+    li {
+      margin-bottom: 15px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(45, 90, 45, 0.3);
+      padding: 15px;
+      border-radius: 0;
+      border: 2px solid var(--minecraft-dark-green);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    li::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(85, 170, 85, 0.2),
+        transparent
+      );
+      transition: left 0.5s ease;
+    }
+    
+    li:hover::before {
+      left: 100%;
+    }
+    
+    li:hover {
+      background: rgba(45, 90, 45, 0.5);
+      border-color: var(--minecraft-green);
+      transform: translateX(5px);
+      box-shadow: 0 0 15px rgba(85, 170, 85, 0.3);
+    }
+    
+    .pack-name {
+      font-weight: 600;
+      font-size: 1.1rem;
+      color: var(--minecraft-white);
+      font-family: 'Courier New', monospace;
+      position: relative;
+      padding-left: 25px;
+    }
+    
+    .pack-name::before {
+      content: '■';
+      position: absolute;
+      left: 0;
+      color: var(--minecraft-green);
+      animation: blockPulse 2s infinite;
+    }
+    
+    @keyframes blockPulse {
+      0%, 100% { 
+        transform: scale(1);
+        opacity: 1;
+      }
+      50% { 
+        transform: scale(1.2);
+        opacity: 0.7;
+      }
+    }
+    
+    a.download-btn {
+      text-decoration: none;
+      background: linear-gradient(135deg, var(--minecraft-green), var(--minecraft-dark-green));
+      color: white;
+      padding: 12px 24px;
+      border-radius: 0;
+      font-family: 'Press Start 2P', cursive;
+      font-size: 0.8rem;
+      transition: all 0.3s ease;
+      border: 2px solid var(--minecraft-dark-green);
+      position: relative;
+      overflow: hidden;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+    
+    a.download-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255,255,255,0.2),
+        transparent
+      );
+      transition: left 0.5s ease;
+    }
+    
+    a.download-btn:hover::before {
+      left: 100%;
+    }
+    
+    a.download-btn:hover {
+      background: linear-gradient(135deg, var(--minecraft-dark-green), var(--minecraft-green));
+      transform: translateY(-2px);
+      box-shadow: 
+        0 5px 15px rgba(0,0,0,0.4),
+        0 0 10px rgba(85, 170, 85, 0.5);
+      border-color: var(--minecraft-green);
+    }
+    
+    a.download-btn:active {
+      transform: translateY(0);
+      box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+    }
+    
+    /* Анимированный индикатор загрузки */
+    .loading-indicator {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(90deg, 
+        var(--minecraft-green) 0%, 
+        var(--minecraft-dark-green) 50%, 
+        var(--minecraft-green) 100%);
+      background-size: 200% 100%;
+      animation: loadingBar 2s linear infinite;
+      z-index: 1000;
+      display: none;
+    }
+    
+    @keyframes loadingBar {
+      0% { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+    
+    /* Minecraft чанк анимация внизу */
+    .minecraft-chunk {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 60px;
+      background: linear-gradient(transparent, rgba(0,0,0,0.8));
+      z-index: -1;
+    }
+    
+    .minecraft-chunk::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 32px;
+      background-image: 
+        linear-gradient(45deg, var(--minecraft-dark-brown) 25%, transparent 25%),
+        linear-gradient(-45deg, var(--minecraft-dark-brown) 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, var(--minecraft-dark-brown) 75%),
+        linear-gradient(-45deg, transparent 75%, var(--minecraft-dark-brown) 75%);
+      background-size: 32px 32px;
+      background-position: 0 0, 0 16px, 16px -16px, -16px 0px;
+      animation: chunkMove 10s linear infinite;
+    }
+    
+    @keyframes chunkMove {
+      0% {
+        background-position: 0 0, 0 16px, 16px -16px, -16px 0px;
+      }
+      100% {
+        background-position: 32px 0, 32px 16px, 48px -16px, 16px 0px;
+      }
+    }
+    
+    /* Анимация появления при скролле */
+    @media (prefers-reduced-motion: no-preference) {
+      .scroll-animate {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: opacity 0.6s ease, transform 0.6s ease;
+      }
+      
+      .scroll-animate.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 1.8rem;
+        padding: 15px;
+      }
+      
+      section {
+        padding: 20px;
+      }
+      
+      li {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      
+      a.download-btn {
+        margin-top: 10px;
+        width: 100%;
+        text-align: center;
+      }
+      
+      .pack-name {
+        padding-left: 20px;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      h1 {
+        font-size: 1.4rem;
+      }
+      
+      h2 {
+        font-size: 1rem;
+      }
+      
+      body {
+        padding: 10px;
+      }
+    }
+    
+    /* Кнопка наверх в стиле Minecraft */
+    .back-to-top {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: var(--minecraft-green);
+      color: white;
+      width: 50px;
+      height: 50px;
+      border-radius: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      cursor: pointer;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+      border: 2px solid var(--minecraft-dark-green);
+      font-family: 'Press Start 2P', cursive;
+      z-index: 100;
+      transform: scale(0.8);
+    }
+    
+    .back-to-top.visible {
+      opacity: 1;
+      visibility: visible;
+      transform: scale(1);
+    }
+    
+    .back-to-top:hover {
+      background: var(--minecraft-dark-green);
+      transform: scale(1.1);
+      box-shadow: 0 0 15px rgba(85, 170, 85, 0.5);
+    }
+  </style>
+</head>
+<body>
+  <!-- Индикатор загрузки -->
+  <div class="loading-indicator" id="loadingIndicator"></div>
+  
+  <!-- Кнопка наверх -->
+  <div class="back-to-top" id="backToTop">↑</div>
+  
+  <h1>Twitch Ресурспаки Minecraft</h1>
+  
+  <!-- Minecraft чанк внизу -->
+  <div class="minecraft-chunk"></div>
+  
+<section id="v1-16-2-1-16-5">
+  <h2>Версии 1.16.2 — 1.16.5</h2>
+  <ul>
+    <li>
+      <span class="pack-name">Ресурспак "MZLFF"</span>
+      <a href="https://drive.google.com/file/d/1OlHwCWLNHZRXM53Lz030lLojdYV0kcMX/view?usp=drive_link" class="download-btn" download>Скачать</a>
+    </li>
+    <li>
+      <span class="pack-name">Ресурспак "CMH"</span>
+      <a href="https://drive.google.com/file/d/1jkdr-6z0er4a0wetAbZihU5pykkxURFX/view?usp=drive_link" class="download-btn" download>Скачать</a>
+    </li>
+    <li>
+      <span class="pack-name">Ресурспак "5OPKA"</span>
+      <a href="https://drive.google.com/file/d/1a6WCRkI9c6OcJsZ3suMfbsU9t5jN0dEH/view?usp=drive_link" class="download-btn" download>Скачать</a>
+    </li>
+    <li>
+      <span class="pack-name">Ресурспак "LIDA77"</span>
+      <a href="https://drive.google.com/file/d/1l7zWHgpBvHRamNO0kIyhaukWotyDViCc/view?usp=drive_link" class="download-btn" download>Скачать</a>
+    </li>
+    <li>
+      <span class="pack-name">Ресурспак "LIDA"</span>
+      <a href="https://drive.google.com/file/d/1kbsLlpjj6fjyOBE1VIZZSsHz1-T0T95I/view?usp=drive_link" class="download-btn" download>Скачать</a>
+    </li>
+    <!-- Добавь свои ресурспаки сюда -->
+  </ul>
+</section>
+
+<section id="v1-19">
+  <h2>Версия 1.19</h2>
+  <ul>
+    <li>
+      <span class="pack-name">Ресурспак "MZLFF"</span>
+      <a href="https://drive.google.com/file/d/1sHqYIyDupxeDVZwC-fZeXlpEOiB3kpHp/view?usp=drive_link" class="download-btn" download>Скачать</a>
+    </li>
+
+    <li>
+      <span class="pack-name">Ресурспак "5OPKA"</span>
+      <a href="https://drive.google.com/file/d/1sLHi_WLlWdlOJqsW46PGi1NYm003FyWo/view?usp=drive_link" class="download-btn" download>Скачать</a>
+    </li>
+    <li>
+      <span class="pack-name">Ресурспак "CMH"</span>
+      <a href="https://drive.google.com/file/d/1nq_0y4ioaKA7Eu1WPl41xjbnLtzrht6f/view?usp=drive_link" class="download-btn" download>Скачать</a>
+    </li>
+    <li>
+      <span class="pack-name">Ресурспак "LIDA"</span>
+      <a href="https://drive.google.com/file/d/1uK14SxN11ci18aNVufPTPxq4YXJXMp_S/view?usp=drive_link" class="download-btn" download>Скачать</a>
+    </li>
+    <li>
+      <span class="pack-name">Ресурспак "LIDA77"</span>
+      <a href="https://drive.google.com/file/d/1Cb9ousk459FUHKYooYusM0l-4iQyEIEI/view?usp=drive_link" class="download-btn" download>Скачать</a>
+    </li>
+    <!-- Добавь свои ресурспаки сюда -->
+  </ul>
+</section>
+
+<section id="v1-19-1-1-19-2">
+  <h2>Версии 1.19.1 — 1.19.2</h2>
+  <ul>
+    <li>
+      <span class="pack-name">Ресурспак "MZLFF"</span>
+      <a href="https://drive.google.com/file/d/1g1-8aFzlYBjcj4l7IJZZPTQ5WN3aN-Oc/view?usp=drive_link" class="download-btn" download>Скачать</a>
+    </li>
+    <li>
+      <span class="pack-name">Ресурспак "5OPKA"</span>
+      <a href="https://drive.google.com/file/d/188xbb2Dq5n_kZCqbxWTq-J8s-bN9KK12/view?usp=drive_link" class="download-btn" download>Скачать</a>
+    </li>
+    <li>
+      <span class="pack-name">Ресурспак "CMH"</span>
+      <a href="https://drive.google.com/file/d/1jSt7qPkhUFAyIbeo2WiryhGqEK_8tfYz/view?usp=drive_link" class="download-btn" download>Скачать</a>
+    </li>
+    <li>
+      <span class="pack-name">Ресурспак "LIDA77"</span>
+      <a href="https://drive.google.com/file/d/1IFTaiOFJZITT0Mxuo9N9B1kxEor0hvWs/view?usp=drive_link" class="download-btn" download>Скачать</a>
+    </li>
+    <li>
+      <span class="pack-name">Ресурспак "LIDA"</span>
+      <a href="https://drive.google.com/file/d/1EiqIqpfDUyKAZaFF3RqFY_UC0t6Pa03C/view?usp=drive_link" class="download-btn" download>Скачать</a>
+    </li>
+    <!-- Добавь свои ресурспаки сюда -->
+  </ul>
+</section>
+
+<section id="v1-19-4">
+  <h2>Версия 1.19.4</h2>
+  <ul>
+    <li>
+      <span class="pack-name">Ресурспак "MZLFF"</span>
+      <a href="https://drive.google.com/file/d/1ssKtrnzd632v2p5Cncpvo5BrOtTRT0m7/view?usp=drive_link" class="download-btn" download>Скачать</a>
+    </li>
+    <li>
+      <span class="pack-name">Ресурспак "5OPKA"</span>
+      <a href="https://drive.google.com/file/d/14z1f2yirLFD70LjNMdVvy_dTFxiYUU36/view?usp=drive_link" class="download-btn" download>Скачать</a>
+    </li>
+    <li>
+      <span class="pack-name">Ресурспак "CMH"</span>
+      <a href="https://drive.google.com/file/d/1dqSRiKjiAJ58o4InRTvdieMaDxOSycFQ/view?usp=drive_link" class="download-btn" download>Скачать</a>
+    </li>
+    <li>
+      <span class="pack-name">Ресурспак "LIDA77"</span>
+      <a href="https://drive.google.com/file/d/1IHaJmn9xgWV-WHvZS9HlZmtMjSjKpQiM/view?usp=drive_link" class="download-btn" download>Скачать</a>
+    </li>
+    <li>
+      <span class="pack-name">Ресурспак "LIDA"</span>
+      <a href="https://drive.google.com/file/d/1wlqn5we801mhruNl4tWO46qTjoRBOpvS/view?usp=drive_link" class="download-btn" download>Скачать</a>
+    </li>
+    <!-- Добавь свои ресурспаки сюда -->
+  </ul>
+</section>
+
+<section id="v1-20-1-20-1">
+  <h2>Версии 1.20 — 1.20.1</h2>
+  <ul>
+    <li>
+      <span class="pack-name">Ресурспак "MZLFF"</span>
+      <a href="https://drive.google.com/file/d/1EAFalXD7XGC_KTHhiCT9PWCTlgHa2lkn/view?usp=drive_link" class="download-btn" download>Скачать</a>
+    </li>
+    <li>
+      <span class="pack-name">Ресурспак "5OPKA"</span>
+      <a href="https://drive.google.com/file/d/19d7PFiMWRtr9p2FPQ4Dibq1mRzh-_79l/view?usp=drive_link" class="download-btn" download>Скачать</a>
+    </li>
+    <li>
+      <span class="pack-name">Ресурспак "CMH"</span>
+      <a href="https://drive.google.com/file/d/15X71n_Er1C0Ql_HOmYR4ltdujvCe9ce1/view?usp=drive_link" class="download-btn" download>Скачать</a>
+    </li>
+    <li>
+      <span class="pack-name">Ресурспак "LIDA"</span>
+      <a href="https://drive.google.com/file/d/1YzbgtLEweWzrWbhnHYuD8xPxCnlwradI/view?usp=drive_link" class="download-btn" download>Скачать</a>
+    </li>
+    <li>
+      <span class="pack-name">Ресурспак "LIDA77"</span>
+      <a href="https://drive.google.com/file/d/1MAtxHyzG0biu3HKDc2iXOYwQxfsYjO-g/view?usp=drive_link" class="download-btn" download>Скачать</a>
+    </li>
+    <!-- Добавь свои ресурспаки сюда -->
+  </ul>
+</section>
+
+<section id="v1-21-1-21-1">
+  <h2>Версии 1.21 — 1.21.1</h2>
+  <ul>
+    <li>
+      <span class="pack-name">Ресурспак "MZLFF"</span>
+      <a href="https://drive.google.com/file/d/1F02GP-IfCb51FbKn1HLbbX875Wpix8WO/view?usp=drive_link" class="download-btn" download>Скачать</a>
+    </li>
+    <li>
+      <span class="pack-name">Ресурспак "5OPKA"</span>
+      <a href="https://drive.google.com/file/d/1R-RWnFUs98_1OQJtiz9zeYbJ8ADKlD3p/view?usp=drive_link" class="download-btn" download>Скачать</a>
+    </li>
+    <li>
+      <span class="pack-name">Ресурспак "CMH"</span>
+      <a href="https://drive.google.com/file/d/149aD7uvZYYoAxqnBRwG_uDscimx-bebl/view?usp=drive_link" class="download-btn" download>Скачать</a>
+    </li>
+    <li>
+      <span class="pack-name">Ресурспак "LIDA"</span>
+      <a href="https://drive.google.com/file/d/10U8emYP082TFNwWrtFvILYLlDKu_xPam/view?usp=drive_link" class="download-btn" download>Скачать</a>
+    </li>
+    <li>
+      <span class="pack-name">Ресурспак "LIDA77"</span>
+      <a href="https://drive.google.com/file/d/1GXG1YGx4k34ny6Ul3ZdQS5ccbiJxfcPR/view?usp=drive_link" class="download-btn" download>Скачать</a>
+    </li>
+    <!-- Добавь свои ресурспаки сюда -->
+  </ul>
+</section>
+
+<section id="v1-21-5-plus">
+  <h2>Версия 1.21.5 и выше</h2>
+  <ul>
+    <li>
+      <span class="pack-name">Ресурспак "MZLFF"</span>
+      <a href="https://drive.google.com/file/d/1AMyNxiBxaanNO5ZT_uNOg52wInQYued_/view?usp=drive_link" class="download-btn" download>Скачать</a>
+    </li>
+    <li>
+      <span class="pack-name">Ресурспак "5OPKA"</span>
+      <a href="https://drive.google.com/file/d/1hjyPqZuDfzzNYo_6UvFSAaYOamgM-FvY/view?usp=drive_link" class="download-btn" download>Скачать</a>
+    </li>
+    <li>
+      <span class="pack-name">Ресурспак "CMH"</span>
+      <a href="https://drive.google.com/file/d/1tVCc3aPl26ZbMDH_pr6SeZEJvY9WoZ8P/view?usp=drive_link" class="download-btn" download>Скачать</a>
+    </li>
+    <li>
+      <span class="pack-name">Ресурспак "LIDA"</span>
+      <a href="https://drive.google.com/file/d/1EiQ7yQ_P3vqhiSHPt94JaEx7phmFd22p/view?usp=drive_link" class="download-btn" download>Скачать</a>
+    </li>
+    <li>
+      <span class="pack-name">Ресурспак "LIDA77"</span>
+      <a href="https://drive.google.com/file/d/1xLSz4-6f2p2HcX4Uah0Com-JGFkokn0K/view?usp=drive_link" class="download-btn" download>Скачать</a>
+    </li>
+
+    <!-- Добавь свои ресурспаки сюда -->
+  </ul>
+</section>
+
+<button class="feedback-btn minecraft-sign">
+  <a href="https://t.me/TwitchRPminecraft" target="_blank">
+    Нашли ошибку или хотите связаться с нами?<br>ТГК @TwitchRPminecraft
+  </a>
+</button>
+
+<style>
+.feedback-btn.minecraft-sign {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  padding: 0;
+  width: 180px; /* Увеличил ширину */
+  height: 100px; /* Увеличил высоту */
+}
+
+.feedback-btn.minecraft-sign a {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  background-image: url("https://png.klev.club/uploads/posts/2024-04/png-klev-club-ujp1-p-tablichka-iz-mainkrafta-png-4.png");
+  background-size: cover;
+  image-rendering: pixelated;
+  font-family: 'Minecraft', monospace;
+  font-size: 14px; /* Увеличил размер шрифта */
+  color: black; /* Изменил цвет текста на черный */
+  text-decoration: none;
+    font-weight: bold; /* Сделал текст жирным */
+  text-shadow: 1px 1px 0 #ccc, -1px -1px 0 #ccc;  /* Изменил цвет тени для лучшей читаемости на черном фоне */
+  text-align: center;
+  box-sizing: border-box;
+  padding: 5px;
+}
+
+.feedback-btn.minecraft-sign a:hover {
+  filter: brightness(1.1);
+}
+
+/* Подключение шрифта Minecraft (если он у вас есть) */
+@font-face {
+    font-family: 'Minecraft';
+    src: url('путь_к_вашему_шрифту/Minecraft.ttf');
+}
+</style>
+
+</body>
+</html>
